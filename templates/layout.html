@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GusinaWeb Project {% if page_title %}| {{ page_title }}{% endif %}</title>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+
+        p {
+            margin: 20px 0;
+            line-height: 1.5em;
+        }
+
+        header h1 {
+            font-size: 3.8em;
+            line-height: 1.2em;
+        }
+
+        .post {
+            margin-bottom: 25px;
+        }
+
+        .post h4 {
+            margin: 0; 
+        }
+    </style>
+    <link href="{{ url_for('static', filename='css/bootstrap-responsive.min.css') }}" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ссылки <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="https://github.com/haniani">GitHub</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="https://github.com/haniani/hse_zadanie3">Gusina Wiki Frequency List</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="https://github.com/haniani/hse_zadanie4">Gusina Text Analusers</a></li>
+          </ul>
+        </li>
+        <li><a href="/about">О проекте</a></li>
+        <li><a href="/screenshots">Скриншоты</a></li>
+        <li><a href="/gusinafamily">Gusina Family</a></li>
+        <li><a href="/page/test">Пробная страница</a></li>
+      </ul>
+      <button style='margin: 0.5% 0.5% 0px 0px' type="button" class="btn btn-warning dropdown-toggle pull-right" id="ThirdButton" >
+        Обновить
+        </button>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="span8 offset2">
+            <header class="jumbotron">
+                <h1 align="center">a / hazova</h1>
+                <p align='center'><marquee><img align="center" src="/static/img/gus.gif"></marquee></p>
+                <hr />
+            </header>
+        </div>
+    </div>
+
+    {% block content%}{% endblock %}
+
+    <div class="row">
+        <div class="span8 offset2">
+            <hr />
+            <footer>
+                <small>
+                    <a align="center" href="https://github.com/haniani" class="list-group-item">This blog was built by haniani</a>
+                </small>
+            </footer>
+        </div>
+    </div>
+</div>
+<br /><br />
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script>
+    var elem = document.getElementById("ThirdButton");
+    ThirdButton.onclick = function () {
+    if (this.style.backgroundColor)
+      this.style.backgroundColor = "";
+    else this.style.backgroundColor = "grey"; 
+  }     
+  $(document).ready(function(){
+    $("#ThirdButton").click(function(){
+        location.reload();
+    });
+  });                
+</script>
+
+</body>
+</html>

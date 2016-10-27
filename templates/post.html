@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="span8 offset2">
+            <a href="/">&larr; Домой</a><br />
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="span8 offset2">
+        <b>Дата поста: </b>{{ post_date|date_format }}
+            <div id="post_content">{{ content }}</div>
+             <form action="/get_len" method="post" name="form">
+               <input style="display:none" id="counter" name="counter" type="text">
+               <center>
+                   <input type="button" class="btn btn-primary center-block" value="Посчитать количество символов" onclick="to_input();post_len();">
+               </center>
+           </form>
+           <br />
+           <div id="len" ></div>
+        </div>
+    </div>
+
+<script>
+      function to_input() {
+        a = document.getElementById('counter');
+        b = document.getElementById('post_content');
+        a.value = b.innerText;
+      }
+      function post_len() {
+          $.ajax({
+              type: "POST",
+              url: "/post_len",
+              data: $('form').serialize(),
+              type: 'POST',
+              success: function(response) {
+                  var json = jQuery.parseJSON(response)
+                  $('#len').html("<strong>Символов в посте: </strong>"+json.len)
+                  console.log(response);
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+          });
+      }
+  </script>
+
+{% endblock %}
