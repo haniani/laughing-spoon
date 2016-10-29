@@ -18,7 +18,7 @@
                </center>
            </form>
            <br />
-           <div id="len" ></div>
+           <div id="symbolcount" ></div>
         </div>
     </div>
 
@@ -36,7 +36,7 @@
               type: 'POST',
               success: function(response) {
                   var json = jQuery.parseJSON(response)
-                  $('#len').html("<strong>Символов в посте: </strong>"+json.len)
+                  $('#symbolcount').html("<strong>Символов в посте: </strong>"+json.len)
                   console.log(response);
               },
               error: function(error) {
