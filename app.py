@@ -30,9 +30,9 @@ app = Flask(__name__)
 app.config['ASSETS_DEBUG'] = True
 app.debug = True
 
-locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')  #для дат на русском
+locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')  
 
-def format_post(item):                                        #форматируем текст с markdown
+def format_post(item):  # Work with markdown
     bits = item.split('_', 1)
     date = datetime.strptime(bits[0], '%Y%m%d')
     title = bits[1].replace('_', ' ').replace('.md', '').title()
@@ -41,14 +41,14 @@ def format_post(item):                                        #форматир�
     return {'date': date, 'title': title, 'slug': slug}
 
 def get_post_dir():
-    return os.path.dirname(os.path.abspath(__file__)) + '/posts'  #определяем папку с постами
+    return os.path.dirname(os.path.abspath(__file__)) + '/posts'  # Dir with posts
 
-def get_post_items():             #находим все посты и сортируем 
+def get_post_items():  # Sort posts 
     items = os.listdir(get_post_dir())
     items.sort(reverse=True)    #сортируем от более новых к старым
     return items
 
-def get_posts():     #получаем все посты
+def get_posts():  # Get all posts
     posts = []
     for item in get_post_items():
         if item[0] == '.' or item[0] == '_':
@@ -58,11 +58,11 @@ def get_posts():     #получаем все посты
 
     return posts
 
-@app.template_filter('date_format')    #человеческий вид даты в шаблоне
+@app.template_filter('date_format')  # Good date view
 def date_format(timestamp):
     return timestamp.strftime('{S} %B, %Y').replace('{S}', str(timestamp.day))
 
-@app.errorhandler(404)                                      #для ошибок
+@app.errorhandler(404)  # For errors
 def _404(e):
     return render_template('errors/404.html'), 404
 
@@ -74,7 +74,7 @@ def _500(e):
 
 
 @app.route('/')
-@app.route('/index')       #главная страница
+@app.route('/index')  # Main page
 def index():
 
     try:
@@ -96,7 +96,7 @@ def screenshots():
     return flask.render_template('screenshots.html')
 
 
-@app.route('/page/<slug>')    #статика
+@app.route('/page/<slug>')  # Static
 def page(slug):
     try:
         content = app.open_resource('pages/%s.md' % slug.replace('-', '_'), 'r').read()
@@ -110,7 +110,7 @@ def page(slug):
         abort(404)
 
 
-@app.route('/post/<slug>')    #посты в блоге
+@app.route('/post/<slug>')  # Posts in blog
 def post(slug):
     try:
         post = None
