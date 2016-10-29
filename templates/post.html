@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <div class="span8 offset2">
-        <b>Дата поста: </b>{{ post_date|date_format }}
+          <b>Дата поста: </b>{{ post_date|date_format }}
             <div id="post_content">{{ content }}</div>
              <form action="/get_len" method="post" name="form">
                <input style="display:none" id="counter" name="counter" type="text">
