@@ -45,7 +45,7 @@ def get_post_dir():
 
 def get_post_items():  # Sort posts 
     items = os.listdir(get_post_dir())
-    items.sort(reverse=True)    #сортируем от более новых к старым
+    items.sort(reverse=True)  
     return items
 
 def get_posts():  # Get all posts
